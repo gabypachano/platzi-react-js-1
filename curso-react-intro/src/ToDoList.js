@@ -1,11 +1,5 @@
-function ToDoList() {
-  return (
-    <div>
-      <ul>
-        <li></li>
-      </ul>
-    </div>
-  );
+function ToDoList(props) {
+  return <ul>{props.children}</ul>;
 }
 
 export { ToDoList };
