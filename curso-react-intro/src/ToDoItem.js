@@ -1,9 +1,9 @@
-function ToDoItem() {
+function ToDoItem(props) {
   return (
     <div>
       <li>
-        <span>G</span>
-        <p>Gaby Coach</p>
+        <span>V</span>
+        <p> {props.text} </p>
         <span>X</span>
       </li>
     </div>
