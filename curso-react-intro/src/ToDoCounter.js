@@ -1,3 +1,5 @@
+import "./ToDoCounter.css";
+
 function ToDoCounter({ completed, total }) {
   return (
     <div>
