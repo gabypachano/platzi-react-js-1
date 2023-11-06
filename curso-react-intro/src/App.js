@@ -7,9 +7,9 @@ import { CreateToDoButton } from "./CreateToDoButton";
 import { ToDoList } from "./ToDoList";
 
 const defaultToDos = [
-  { text: "Orar a diario", completed: true },
-  { text: "Salir a la rambla con Kay", completed: true },
-  { text: "Hacer LA torta", completed: true },
+  { text: "Orar a diario", completed: false },
+  { text: "Salir a la rambla con Kay", completed: false },
+  { text: "Hacer LA torta", completed: false },
   { text: "Ver el amanecer/atardecer", completed: false },
   { text: "Cenar", completed: true },
 ];
@@ -17,7 +17,6 @@ const defaultToDos = [
 function App() {
   const [toDos, setToDos] = React.useState(defaultToDos);
   const [searchValue, setSearchValue] = React.useState("");
-  console.log("Los usuarios buscan todos de " + searchValue);
 
   const completedToDos = toDos.filter((todo) => !!todo.completed).length;
   const totalToDos = toDos.length;
@@ -27,6 +26,20 @@ function App() {
     const searchText = searchValue.toLowerCase();
     return toDoText.includes(searchText);
   });
+
+  const toDoComplete = (text) => {
+    const newToDos = [...toDos];
+    const toDoIndex = newToDos.findIndex((todo) => todo.text === text);
+    newToDos[toDoIndex].completed = true;
+    setToDos(newToDos);
+  };
+
+  const toDoDelete = (text) => {
+    const newToDos = [...toDos];
+    const toDoIndex = newToDos.findIndex((todo) => todo.text === text);
+    newToDos.splice(toDoIndex, 1);
+    setToDos(newToDos);
+  };
 
   return (
     <div className="App">
@@ -39,6 +52,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => toDoComplete(todo.text)}
+            onDelete={() => toDoDelete(todo.text)}
           />
         ))}
       </ToDoList>
